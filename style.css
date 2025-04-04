@@ -3,9 +3,86 @@
 }
 
 body {
-    background-color: beige;
+    background-color: #22222e;
 }
 
 header {
-    background-color: aqua;
+    font-size: larger;
+    color:antiquewhite;
+    /* background-color: aqua; */
+
+}
+
+.title{
+
+    font-size: 300%;
+    align-items:center ;
+    text-align: center;
+}
+
+.txt{
+    font-weight: bold;
+    text-align: center;
+}
+
+.forms{
+    display:flex;
+    justify-content: center;   
+    padding-top: 5%;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid antiquewhite; 
+    border-radius: 5px; /* Bordas arredondadas */
+    outline: none; /* Retirar o contorno ao focar */
+    width: 30%; /* Largura total */
+    box-sizing: border-box; /* Inclui padding na largura total */
+    transition: border-color 0.3s ease-in-out;
+    background-color: #22222e;
+    color: antiquewhite;
+}
+
+input:focus {
+    /* border-color:rgb(126, 119, 109) ; Cor de borda quando o input está em foco */
+}
+
+button {
+    margin-left: 1%;
+    padding: 12px 20px;
+    background-color: antiquewhite; /* Cor de fundo */
+    /* color: rgb(61, 57, 51; */
+    color: #22222e;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(126, 119, 109); /* Cor de fundo quando o botão é hover */
+}
+
+button:active {
+    background-color: rgb(85, 80, 74); /* Cor de fundo quando o botão é pressionado */
+}
+
+.taskarea{
+    display: flex;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.taskbox{
+    
+    width: 33%;
+    height: 9rem; ;
+    background-color: green;   
+    /* border-radius: 20%;  */
+}
+
+.task{
+
 }
