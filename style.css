@@ -9,12 +9,9 @@ body {
 header {
     font-size: larger;
     color:antiquewhite;
-    /* background-color: aqua; */
-
 }
 
 .title{
-
     font-size: 300%;
     align-items:center ;
     text-align: center;
@@ -44,9 +41,9 @@ input {
     color: antiquewhite;
 }
 
-input:focus {
-    /* border-color:rgb(126, 119, 109) ; Cor de borda quando o input está em foco */
-}
+/* input:focus {
+    border-color:rgb(126, 119, 109); Cor de borda quando o input está em foco
+} */
 
 button {
     margin-left: 1%;
@@ -71,13 +68,15 @@ button:active {
 
 .taskarea{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
     margin-left: 1rem;
     margin-top: 1rem;
 }
 
 .taskbox{
-    
-    width: 33%;
+    width: 30%;
     height: 9rem; ;
     background-color: green;   
     /* border-radius: 20%;  */
