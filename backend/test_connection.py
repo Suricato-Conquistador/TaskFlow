@@ -13,7 +13,8 @@ tasks = db["tasks"]
 users = db["users"]
 
 #Para TESTE
-#for db_name in client.list_database_names():
-#    print(db_name)
+for db_name in client.list_database_names():
+    print(db_name)
+print("Connection realized successfully")
 
 client.close()

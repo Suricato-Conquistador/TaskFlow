@@ -1,6 +1,6 @@
 def document_task(task):
     return {
-        "id": str(task["id"]),
+        "_id": str(task["_id"]),
         "title": str(task["title"]),
         "description": str(task["description"]),
         "status": str(task["status"])
@@ -11,7 +11,7 @@ def all_tasks(tasks):
 
 def document_user(user):
     return {
-        "id": str(user["id"]),
+        "_id": str(user["_id"]),
         "name": str(user["name"]),
         "email": str(user["email"]),
         "password": str(user["password"])

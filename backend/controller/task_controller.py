@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter, HTTPException
-from connection import tasks 
+from configurations import tasks 
 from database.schemas import all_tasks
 from database.models import Task
 from bson.objectid import ObjectId 
