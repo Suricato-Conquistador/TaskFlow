@@ -1,6 +1,7 @@
 def document_task(task):
     return {
         "_id": str(task["_id"]),
+        "owner": str(task["owner"]),
         "title": str(task["title"]),
         "description": str(task["description"]),
         "status": str(task["status"])

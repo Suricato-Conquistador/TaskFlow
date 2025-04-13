@@ -1,6 +1,7 @@
 from pydantic import BaseModel, validator
 from datetime import datetime
 from enum import Enum
+from typing import List
 
 class Status(Enum):
     NOTSTARTED = 0
@@ -8,6 +9,7 @@ class Status(Enum):
     COMPLETED = 2
 
 class Task(BaseModel):
+    owner: str
     title: str
     description: str
     status: Status
@@ -25,3 +27,4 @@ class User(BaseModel):
     name: str
     email: str
     password: str
+    tasks: List[str]
