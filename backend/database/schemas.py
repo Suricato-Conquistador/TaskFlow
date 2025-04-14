@@ -1,3 +1,5 @@
+from typing import List
+
 def document_task(task):
     return {
         "_id": str(task["_id"]),
@@ -15,7 +17,8 @@ def document_user(user):
         "_id": str(user["_id"]),
         "name": str(user["name"]),
         "email": str(user["email"]),
-        "password": str(user["password"])
+        "password": str(user["password"]),
+        "tasks": [str(task) for task in user["tasks"]]
     }
 
 def all_users(users):

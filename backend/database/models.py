@@ -28,3 +28,6 @@ class User(BaseModel):
     email: str
     password: str
     tasks: List[str]
+    is_deleted: bool = False
+    updated_at: int = int(datetime.timestamp(datetime.now()))
+    created_at: int = int(datetime.timestamp(datetime.now()))
