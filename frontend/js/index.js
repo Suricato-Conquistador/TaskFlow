@@ -1,10 +1,16 @@
-import getTasksByUse from "./connection.js"
+import { getTasksByUser, postUser } from "./connection.js"
 
-// Variables
-const taskArea = document.querySelector("#taskarea")
-const buttonAdd = document.querySelector("#buttonAdd")
-const buttonRemove = document.querySelectorAll("#buttonRemove")
-const title = document.querySelector("#title")
+// Tasks variables
+const taskArea = document.querySelector('#taskarea')
+const buttonAdd = document.querySelector('#buttonAdd')
+const buttonRemove = document.querySelectorAll('#buttonRemove')
+const title = document.querySelector('#title')
+
+
+
+
+
+
 
 
 // 
