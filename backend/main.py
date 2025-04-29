@@ -1,25 +1,39 @@
 from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from configurations import tasks, users 
 from database.schemas import all_tasks, all_users
 from database.models import Task, User
 from bson.objectid import ObjectId
 import bcrypt
 
+
 app = FastAPI()
 router = APIRouter()
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # ou ["http://127.0.0.1:5500"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 #Task routes
-@router.get("/tasks/")
+@router.get("/tasks")
 async def get_all_tasks():
     data = tasks.find({"is_deleted": False})
     return all_tasks(data)
+
 
 @router.get("/tasksByUser/{owner_id}")
 async def get_tasks_by_user(owner_id: str):
     data = tasks.find({"is_deleted": False, "owner": owner_id})
     return all_tasks(data)
 
-@router.post("/task/")
+
+@router.post("/task")
 async def create_task(new_task: Task):
     try:
         task_dict = new_task.model_dump()
@@ -32,6 +46,7 @@ async def create_task(new_task: Task):
         return {"status_code": 200, "_id": str(response.inserted_id)}
     except Exception as e:
         return HTTPException(status_code=500, detail=f"Some error occured {e}")
+
 
 @router.put("/task/{task_id}")
 async def update_task(task_id: str, updated_task: Task):
@@ -50,6 +65,7 @@ async def update_task(task_id: str, updated_task: Task):
     except Exception as e:
         return HTTPException(status_code=500, detail=f"Some error occured {e}") 
 
+
 @router.delete("/task/{task_id}")
 async def delete_task(task_id: str):
     try:
@@ -65,13 +81,15 @@ async def delete_task(task_id: str):
         return HTTPException(status_code=500, detail=f"Some error occured {e}") 
 
 
+
 #User routes
-@router.get("/users/")
+@router.get("/users")
 async def get_all_users():
     data = users.find({"is_deleted": False})
     return all_users(data)
 
-@router.post("/user/")
+
+@router.post("/user")
 async def create_user(new_user: User):
     try:
         user_dict = new_user.model_dump()
@@ -81,6 +99,7 @@ async def create_user(new_user: User):
         return {"status_code": 200, "_id": str(response.inserted_id)}
     except Exception as e:
         return HTTPException(status_code=500, detail=f"Some error occured {e}") 
+
 
 @router.put("/user/{user_id}")
 async def update_user(user_id: str, updated_user: User):
@@ -100,6 +119,7 @@ async def update_user(user_id: str, updated_user: User):
     except Exception as e:
         return HTTPException(status_code=500, detail=f"Some error occured {e}") 
 
+
 @router.delete("/user/{user_id}")
 async def delete_user(user_id: str):
     try:
@@ -113,17 +133,20 @@ async def delete_user(user_id: str):
     except Exception as e:
         return HTTPException(status_code=500, detail=f"Some error occured {e}") 
 
+
 @router.post("/login")
-async def login(login: str, password: str):
+async def login(login: dict[str, str]):
     try:
-        user = users.find_one({"email": login, "is_deleted": False})
+        user = users.find_one({"email": login["login"], "is_deleted": False})
 
         if not user:
-            return HTTPException(status_code=403, detail=f"Invalid credentials") 
+            user = users.find_one({"name": login["login"], "is_deleted": False})
+            if not user:
+                return HTTPException(status_code=403, detail=f"Invalid credentials") 
         
-        pw = password.encode("utf-8")
+        pw = login["password"].encode("utf-8")
 
-        if verifyUser(login, pw, user):
+        if verifyUser(login["login"], pw, user):
             return {"status_code": 200, "message": "Login successfull"}
         else:
             return HTTPException(status_code=403, detail=f"Invalid credentials")
@@ -131,8 +154,10 @@ async def login(login: str, password: str):
     except Exception as e:
         return HTTPException(status_code=500, detail=f"Some error occured {e}")
 
+
 def verifyUser(login: str, hash: str, user: User):
     return login == user["email"] and bcrypt.checkpw(hash, user["password"].encode("utf-8"))
+
 
 #Apagar todos os dados
 @router.delete("/clear")

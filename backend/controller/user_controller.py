@@ -10,12 +10,12 @@ from connection import users
 app = FastAPI()
 router = APIRouter()
 
-@router.get("/users/")
+@router.get("/users")
 async def get_all_users():
     data = users.find({"is_deleted": False})
     return all_users(data)
 
-@router.post("/user/")
+@router.post("/user")
 async def create_user(new_user: User):
     try:
         response = users.insert_one(dict(new_user))

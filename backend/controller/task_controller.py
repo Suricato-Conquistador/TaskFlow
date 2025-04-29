@@ -7,12 +7,12 @@ from bson.objectid import ObjectId
 app = FastAPI()
 router = APIRouter()
 
-@router.get("/tasks/")
+@router.get("/tasks")
 async def get_all_tasks():
     data = tasks.find({"is_deleted": False})
     return all_tasks(data)
 
-@router.post("/task/")
+@router.post("/task")
 async def create_task(new_task: Task):
     try:
         response = tasks.insert_one(dict(new_task))
