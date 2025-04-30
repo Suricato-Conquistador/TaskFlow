@@ -1,0 +1,39 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.content {
+    display: flex;
+    height: 100vh; 
+}
+
+
+.p-lf {
+    flex: 1;
+    background-color: #22222e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p-rt {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    background-color: #22222e;
+    border-radius: 1%;
+    height: 35rem;
+    width: 30rem;
+
+    align-items: center;
+}
