@@ -32,6 +32,10 @@ async def get_tasks_by_user(owner_id: str):
     data = tasks.find({"is_deleted": False, "owner": owner_id})
     return all_tasks(data)
 
+@router.get("/taskById/{id}")
+async def get_task_by_id(id: str):
+    data = tasks.find({"is_deleted": False, "_id": ObjectId(id)})
+    return all_tasks(data)
 
 @router.post("/task")
 async def create_task(new_task: Task):
@@ -88,6 +92,10 @@ async def get_all_users():
     data = users.find({"is_deleted": False})
     return all_users(data)
 
+@router.get("/userById/{id}")
+async def get_user_by_id(id: str):
+    data = users.find({"is_deleted": False, "_id": ObjectId(id)})
+    return all_users(data)
 
 @router.post("/user")
 async def create_user(new_user: User):
