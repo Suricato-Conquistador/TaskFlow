@@ -14,7 +14,7 @@ class Task(BaseModel):
     owner: str
     title: str
     description: str
-    status: Status
+    status: Status = Status.NOTSTARTED
     is_deleted: bool = False
     updated_at: int = int(datetime.timestamp(datetime.now()))
     created_at: int = int(datetime.timestamp(datetime.now()))

@@ -1,6 +1,7 @@
 const api = "http://127.0.0.1:8000"
 
 
+// 
 const getTasksByUser = async(id) => {
     try {
         const response = await fetch(`${api}/tasksByUser/${id}`, {
@@ -24,23 +25,58 @@ const getTasksByUser = async(id) => {
 }
 
 
-const postTask = async(id, title, description, status) => {
-    const response = await fetch(`${api}/task/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            owner: id,
-            title: title,
-            description: description,
-            status: status
+//
+const postTask = async(id, title, description) => {
+    try {
+        const response = await fetch(`${api}/task`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                owner: id,
+                title: title,
+                description: description
+            })
         })
-    })
+    
+        const result = await response.json()
+    
+        if(response.ok) {
+            return result
+        }
+
+    } catch(error) {
+        alert(`Erro: ${error}`)
+        return null
+    }
 }
 
 
+//
+const getUserById = async(id) => {
+    try {
+        const response = await fetch(`${api}/userById/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
 
+        const result = await response.json()
+
+        if(response.ok) {
+            console.log(result)
+            return result
+        }
+    } catch (error) {
+        alert(`Erro: ${error}`)
+        return null
+    }
+}
+
+
+//
 const postUser = async(name, email, password) => {
     try {
         const response = await fetch(`${api}/user`, {
@@ -68,9 +104,8 @@ const postUser = async(name, email, password) => {
 }
 
 
+//
 const postLogin = async(email, password) => {
-    console.log(email)
-    console.log(password)
     try {
         const response = await fetch(`${api}/login`, {
             method: 'POST',
@@ -86,7 +121,7 @@ const postLogin = async(email, password) => {
         const result = await response.json()
 
         if(response.ok) {
-            return result["status_code"]
+            return result
         }
 
     } catch(error) {
@@ -97,7 +132,7 @@ const postLogin = async(email, password) => {
 
 
 //
-export { getTasksByUser }
+export { getTasksByUser, postTask }
 
 //
-export { postUser, postLogin };
+export { getUserById, postUser, postLogin }

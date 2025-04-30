@@ -1,32 +1,57 @@
-import { getTasksByUser, postUser } from "./connection.js"
+import { getTasksByUser, postTask, getUserById } from "./connection.js"
+
 
 // Tasks variables
 const taskArea = document.querySelector('#taskarea')
 const buttonAdd = document.querySelector('#buttonAdd')
 const buttonRemove = document.querySelectorAll('#buttonRemove')
 const title = document.querySelector('#title')
+const description = document.querySelector('#description')
+const userId = sessionStorage.getItem("id")
 
 
-
-
-
-
-
-
-// 
-buttonAdd.addEventListener("click", () => {
-    if(title.value != "") {
-        // getTasksByUser(1)
-        createTask()
-        title.value = ""
+// Verify if exists a logged user
+const verifyUser = async() => {
+    if(userId === null) {
+        window.location.href = "/frontend/login.html"
     }
+    const response = await getUserById(userId)
+    console.log(response)
+}
+
+await verifyUser()
+
+
+
+// Create task
+buttonAdd.addEventListener("click", async() => {
+    if(description.value == "") {
+        description.value = title.value
+    }
+
+    const result = await postTask(userId, title.value, description.value)
+
+    console.log(result)
+
+    // console.log(userId)
+    // console.log(title.value)
+    // console.log(description.value)
+    // createTask()
+    // postTaskDB(userId, title.value, description.value)
+    // title.value = ""
+    // description.value = ""
 })
 
-const tira = () => buttonRemove.forEach(e => removeTask(e))
+
+//
+const postTaskDB = async(id, title, description) => {
+    const result = postTask(id, title, description)
+    alert(result)
+}
 
 
 // Function that create a task
-function createTask() {
+const createTask = async() => {
     const div = document.createElement("div")
     div.className = "taskbox"
 
@@ -41,9 +66,9 @@ function createTask() {
     taskArea.appendChild(div)
 }
 
-function removeTask(e) {
-    e.addEventListener("click", () => {
-        let pai = e.parentElement
-        pai.remove()
-    })
-}
+// function removeTask(e) {
+//     e.addEventListener("click", () => {
+//         let pai = e.parentElement
+//         pai.remove()
+//     })
+// }

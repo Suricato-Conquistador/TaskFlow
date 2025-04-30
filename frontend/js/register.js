@@ -1,5 +1,6 @@
 import { postUser } from "./connection.js"
 
+
 // Register variables
 const name = document.querySelector('#name')
 const email = document.querySelector('#email')
@@ -8,7 +9,7 @@ const password2 = document.querySelector('#password2')
 const buttonRegister = document.querySelector('#buttonRegister')
 
 
-//
+// Register function
 buttonRegister.addEventListener("click", async() => {
     if(password1.value != password2.value) {
         return alert('As senhas devem ser iguais')
