@@ -155,7 +155,7 @@ async def login(login: dict[str, str]):
         pw = login["password"].encode("utf-8")
 
         if verifyUser(login["login"], pw, user):
-            return {"status_code": 200, "message": "Login successfull"}
+            return {"status_code": 200, "message": "Login successfull", "_id": str(user["_id"])}
         else:
             return HTTPException(status_code=403, detail=f"Invalid credentials")
 
