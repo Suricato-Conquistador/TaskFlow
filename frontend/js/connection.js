@@ -14,7 +14,6 @@ const getTasksByUser = async(id) => {
         const result = await response.json()
 
         if(response.ok) {
-            console.log(result)
             return result
         }
 
@@ -54,6 +53,29 @@ const postTask = async(id, title, description) => {
 
 
 //
+const deleteTask = async(id) => {
+    try {
+        const response = await fetch(`${api}/task/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+
+        const result = await response.json()
+
+        if(response.ok) {
+            return result
+        }
+
+    } catch(error) {
+        alert(`Erro: ${error}`)
+        return null
+    }
+}
+
+
+//
 const getUserById = async(id) => {
     try {
         const response = await fetch(`${api}/userById/${id}`, {
@@ -66,7 +88,6 @@ const getUserById = async(id) => {
         const result = await response.json()
 
         if(response.ok) {
-            console.log(result)
             return result
         }
     } catch (error) {
@@ -132,7 +153,7 @@ const postLogin = async(email, password) => {
 
 
 //
-export { getTasksByUser, postTask }
+export { getTasksByUser, postTask, deleteTask }
 
 //
 export { getUserById, postUser, postLogin }

@@ -98,7 +98,7 @@ async def get_user_by_id(id: str):
     data = users.find({"is_deleted": False, "_id": ObjectId(id)})
     if not data:
         return HTTPException(status_code=404, detail=f"User does not exist")
-    return all_users(data)
+    return {"status_code": 200, "user": all_users(data)[0]}
 
 
 @router.post("/user")

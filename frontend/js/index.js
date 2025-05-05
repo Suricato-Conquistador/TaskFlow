@@ -1,4 +1,4 @@
-import { getTasksByUser, postTask, getUserById } from "./connection.js"
+import { getTasksByUser, postTask, deleteTask, getUserById } from "./connection.js"
 
 
 // Tasks variables
@@ -16,59 +16,81 @@ const verifyUser = async() => {
         window.location.href = "/frontend/login.html"
     }
     const response = await getUserById(userId)
-    console.log(response)
+    if(response["status_code"] != 200) {
+        window.location.href = "/frontend/login.html"
+    }
 }
 
 await verifyUser()
 
 
-
 // Create task
 buttonAdd.addEventListener("click", async() => {
-    if(description.value == "") {
+    if(title.value == "") {
+        return //SWAL
+    } if(description.value == "") {
         description.value = title.value
     }
 
     const result = await postTask(userId, title.value, description.value)
-
     console.log(result)
 
-    // console.log(userId)
-    // console.log(title.value)
-    // console.log(description.value)
-    // createTask()
-    // postTaskDB(userId, title.value, description.value)
-    // title.value = ""
-    // description.value = ""
+    if (result["status_code"] == 200) {
+        const taskId = result["_id"]
+        renderTask(taskId, title.value, description.value)
+    }
+
+    title.value = ""
+    description.value = ""
 })
 
 
-//
-const postTaskDB = async(id, title, description) => {
-    const result = postTask(id, title, description)
-    alert(result)
+// Load tasks
+const loadTask = async() => {
+    const tasks = await getTasksByUser(userId)
+
+    if(tasks) {
+        tasks.forEach(task => {
+            renderTask(task._id, task.title, task.description)
+        })
+    }
 }
 
 
 // Function that create a task
-const createTask = async() => {
+const renderTask = async(id, title, description) => {
     const div = document.createElement("div")
     div.className = "taskbox"
+    div.dataset.taskId = id
 
-    const p = document.createElement("p")
-    p.innerHTML = title.value
+    const pTitle = document.createElement("p")
+    pTitle.innerHTML = `<strong>${title}</strong>`
+
+    const pDesc = document.createElement("p")
+    pDesc.innerHTML = description
 
     const button = document.createElement("button")
-    button.id = "buttonRemove"
+    button.innerText = "Remover"
+    button.classList.add("buttonRemove")
+    button.addEventListener("click", async() => {
+        div.remove()
+        await deleteTask(id)
+    })
 
+    div.appendChild(pTitle)
+    div.appendChild(pDesc)
     div.appendChild(button)
-    div.appendChild(p)
     taskArea.appendChild(div)
 }
 
-// function removeTask(e) {
-//     e.addEventListener("click", () => {
-//         let pai = e.parentElement
-//         pai.remove()
-//     })
-// }
+await loadTask()
+
+
+//
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault()
+        buttonAdd.click()
+    }
+})
+
