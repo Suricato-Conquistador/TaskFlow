@@ -3,21 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <header>
-        <h1>LOGIN</h1>
-    </header>
-    <main>
-        <div>
-            <input type="text" id="email">
-            <input type="password" id="password">
-            <button id="buttonLogin">Login</button>
+    <div class="content">
+        <div class="p-lf"></div> 
+
+        <div class="p-rt"> 
+            <div class="box">
+                <h1>LOGIN</h1>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" id="email">
+
+                    <label for="password">Senha</label>
+                    <input type="password" id="password">
+
+                    <button id="buttonLogin">Login</button>
+                </div>
+
+                <a href="./register.html">Não possui uma conta?</a>
+            </div>
         </div>
-        <a href="./register.html">Não possui uma conta?</a>
-    </main>
+    </div>
+
     <script type="module" src="./js/login.js"></script>
 </body>
 </html>
