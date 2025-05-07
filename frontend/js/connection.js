@@ -25,6 +25,28 @@ const getTasksByUser = async(id) => {
 
 
 //
+const getTaskById = async(id) => {
+    try {
+        const response = await fetch(`${api}/taskById/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+
+        const result = await response.json()
+
+        if(response.ok) {
+            return result[0]
+        }
+    } catch (error) {
+        alert(`Erro: ${error}`)
+        return null
+    }
+}
+
+
+//
 const postTask = async(id, title, description) => {
     try {
         const response = await fetch(`${api}/task`, {
@@ -41,6 +63,47 @@ const postTask = async(id, title, description) => {
     
         const result = await response.json()
     
+        if(response.ok) {
+            return result
+        }
+
+    } catch(error) {
+        alert(`Erro: ${error}`)
+        return null
+    }
+}
+
+
+//
+const putTask = async(id, owner, title, description, status) => {
+    try {
+        const task =  await getTaskById(id)
+        
+        const data = {
+            "owner": owner
+        }
+
+        if (title !== undefined) data.title = title
+        else data.title = task["title"]
+        
+        if (description !== undefined) data.description = description
+        else data.description = task["description"]
+        
+        if (status !== undefined) data.status = parseInt(status)
+        else data.status = parseInt(task["status"])
+        
+        console.log("Enviando body:", JSON.stringify(data))
+
+        const response = await fetch(`${api}/task/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        
+        const result = await response.json()
+
         if(response.ok) {
             return result
         }
@@ -153,7 +216,7 @@ const postLogin = async(email, password) => {
 
 
 //
-export { getTasksByUser, postTask, deleteTask }
+export { getTasksByUser, postTask, putTask, deleteTask }
 
 //
 export { getUserById, postUser, postLogin }

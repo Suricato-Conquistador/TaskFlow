@@ -1,10 +1,11 @@
+import bcrypt
+
 from fastapi import FastAPI, APIRouter, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from configurations import tasks, users 
 from database.schemas import all_tasks, all_users
-from database.models import Task, User
+from database.models import Task, User, TaskUpdate
 from bson.objectid import ObjectId
-import bcrypt
 
 
 app = FastAPI()
@@ -53,7 +54,7 @@ async def create_task(new_task: Task):
 
 
 @router.put("/task/{task_id}")
-async def update_task(task_id: str, updated_task: Task):
+async def update_task(task_id: str, updated_task: TaskUpdate):
     try:
         id = ObjectId(task_id)
         task_dict = updated_task.model_dump()
@@ -168,7 +169,7 @@ async def login(login: dict[str, str]):
 
 
 def verifyUser(login: str, hash: str, user: User):
-    return login == user["email"] and bcrypt.checkpw(hash, user["password"].encode("utf-8"))
+    return login in [user["email"], user["name"]] and bcrypt.checkpw(hash, user["password"].encode("utf-8"))
 
 
 #Apagar todos os dados

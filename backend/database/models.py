@@ -1,7 +1,7 @@
 from pydantic import BaseModel, validator
 from datetime import datetime
 from enum import Enum
-from typing import List
+from typing import List, Optional
 
 
 class Status(Enum):
@@ -19,6 +19,20 @@ class Task(BaseModel):
     updated_at: int = int(datetime.timestamp(datetime.now()))
     created_at: int = int(datetime.timestamp(datetime.now()))
     
+    @validator("status", pre=True)
+    def convert_status_int(cls, value):
+        if isinstance(value, int):
+            return Status(value)
+        return value
+    
+
+class TaskUpdate(BaseModel):
+    owner: str
+    title: Optional[str]
+    description: Optional[str]
+    status: Optional[Status]
+    # is_deleted: Optional[bool]
+
     @validator("status", pre=True)
     def convert_status_int(cls, value):
         if isinstance(value, int):
