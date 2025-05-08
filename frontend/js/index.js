@@ -20,7 +20,7 @@ const verifyUser = async() => {
     }
 }
 
-await verifyUser()
+// await verifyUser()
 
 
 // Create task
@@ -32,10 +32,10 @@ buttonAdd.addEventListener("click", async() => {
     }
 
     const result = await postTask(userId, title.value, description.value)
-
+console.log(result)
     if (result["status_code"] == 200) {
         const taskId = result["_id"]
-        renderTask(taskId, title.value, description.value)
+        await loadTask()
     }
 
     title.value = ""
@@ -45,6 +45,7 @@ buttonAdd.addEventListener("click", async() => {
 
 // Load tasks
 const loadTask = async() => {
+    taskArea.innerHTML=""
     const tasks = await getTasksByUser(userId)
 
     if(tasks) {

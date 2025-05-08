@@ -1,4 +1,4 @@
-const api = "http://127.0.0.1:8000"
+const api = "http://54.172.23.98:8000"
 
 
 // 
@@ -61,7 +61,7 @@ const postTask = async(id, title, description) => {
             })
         })
     
-        const result = await response.json()
+        const result =  response.json()
     
         if(response.ok) {
             return result

@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -22,49 +23,67 @@ header {
     text-align: center;
 }
 
-.forms{
-    display:flex;
-    justify-content: center;   
-    padding-top: 5%;
+.forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2e2e3e;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: antiquewhite;
+    gap: 1rem;
 }
 
-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid antiquewhite; 
-    border-radius: 5px; /* Bordas arredondadas */
-    outline: none; /* Retirar o contorno ao focar */
-    width: 30%; /* Largura total */
-    box-sizing: border-box; /* Inclui padding na largura total */
-    transition: border-color 0.3s ease-in-out;
-    background-color: #22222e;
+.forminp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.forminp label {
+    font-size: 1rem;
     color: antiquewhite;
 }
 
-/* input:focus {
-    border-color:rgb(126, 119, 109); Cor de borda quando o input está em foco
-} */
+.forminp input {
+    background-color: #22222e;
+    border: 2px solid antiquewhite;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: antiquewhite;
+    font-size: 1rem;
+    outline: none;
+}
 
-button {
-    margin-left: 1%;
-    padding: 12px 20px;
-    background-color: antiquewhite; /* Cor de fundo */
-    /* color: rgb(61, 57, 51; */
-    color: #22222e;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px; /* Bordas arredondadas */
+.forminp input::placeholder {
+    color: #aaa;
+}
+
+.forms button {
+    background-color: #22222e;
+    color: antiquewhite;
+    border: 2px solid antiquewhite;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-button:hover {
-    background-color: rgb(126, 119, 109); /* Cor de fundo quando o botão é hover */
+.forms button:hover {
+    background-color: rgb(126, 119, 109);
 }
 
-button:active {
-    background-color: rgb(85, 80, 74); /* Cor de fundo quando o botão é pressionado */
+.forms button:active {
+    background-color: rgb(85, 80, 74);
+    transform: scale(0.98);
 }
+
 
 .taskarea{
     display: flex;
@@ -75,16 +94,61 @@ button:active {
     margin-top: 1rem;
 }
 
-.taskbox{
-    width: 30%;
-    height: 9rem; ;
-    background-color: green;   
-    /* border-radius: 20%;  */
+
+.taskbox {
+    background-color: #2e2e3e;
+    border: 2px solid antiquewhite;
+    border-left: 6px solid rgb(126, 119, 109); /* destaque à esquerda */
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 20rem;
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
 }
 
-.task{
-
+.taskbox:hover {
+    background-color: #3a3a4a;
+    transform: scale(1.01);
 }
+
+.taskbox p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.taskbox select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #22222e;
+    color: antiquewhite;
+    border: 1px solid antiquewhite;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.taskbox .buttonRemove {
+    background-color: #22222e;
+    color: antiquewhite;
+    border: 1px solid antiquewhite;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.taskbox .buttonRemove:hover {
+    background-color: rgb(126, 119, 109);
+}
+
+.taskbox .buttonRemove:active {
+    background-color: rgb(85, 80, 74);
+}
+
 
 .modal-overlay {
     position: fixed;
@@ -92,7 +156,7 @@ button:active {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     display: none;
     justify-content: center;
     align-items: center;
@@ -100,9 +164,47 @@ button:active {
 }
 
 .modal {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
+    background-color: #2e2e3e;
+    color: antiquewhite;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     max-width: 400px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal input {
+    background-color: #22222e;
+    color: antiquewhite;
+    border: 2px solid antiquewhite;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.modal input::placeholder {
+    color: #aaa;
+}
+
+.modal button {
+    background-color: #22222e;
+    color: antiquewhite;
+    border: 2px solid antiquewhite;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.modal button:hover {
+    background-color: rgb(126, 119, 109);
+}
+
+.modal button:active {
+    background-color: rgb(85, 80, 74);
 }
