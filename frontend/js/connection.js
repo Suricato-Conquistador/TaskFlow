@@ -92,8 +92,6 @@ const putTask = async(id, owner, title, description, status) => {
         if (status !== undefined) data.status = parseInt(status)
         else data.status = parseInt(task["status"])
         
-        console.log("Enviando body:", JSON.stringify(data))
-
         const response = await fetch(`${api}/task/${id}`, {
             method: 'PUT',
             headers: {

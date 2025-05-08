@@ -32,7 +32,6 @@ buttonAdd.addEventListener("click", async() => {
     }
 
     const result = await postTask(userId, title.value, description.value)
-    console.log(result)
 
     if (result["status_code"] == 200) {
         const taskId = result["_id"]
@@ -50,7 +49,6 @@ const loadTask = async() => {
 
     if(tasks) {
         tasks.forEach(task => {
-            console.log(task)
             renderTask(task._id, task.title, task.description, task.status)
         })
     }
