@@ -30,7 +30,7 @@ buttonLogin.addEventListener("click", async() => {
             confirmButtonText: 'Ir para home'
         }).then((result) => {
             if(result.isConfirmed){
-                window.location.href = "/frontend/tasks.html"
+                window.location.href = "../tasks.html"
             }
         })
     } else {

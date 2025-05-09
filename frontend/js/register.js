@@ -37,7 +37,7 @@ buttonRegister.addEventListener("click", async() => {
             confirmButtonText: 'Ir para login'
         }).then((result) => {
             if(result.isConfirmed){
-                window.location.href = "/frontend/index.html"
+                window.location.href = "../index.html"
             }
         })
     }
