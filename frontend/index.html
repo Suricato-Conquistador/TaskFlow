@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaksFlow</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <header>
-        <h1 class="title">TaskFlow</h1>
-        <h5 class="txt">Um site para guardar suas tarefas</h5>
-    </header>
-    <main>
-        <div class="forms">
-            <div class="forminp">
-                <label for="title">Titulo</label>
-                <input type="text" id="title">
-                <label for="description">Descrição</label>
-                <input type="text" id="description">
+    <div class="content">
+        <div class="p-lf"></div>
+
+        <div class="p-rt"> 
+            <div class="box">
+                <h1>LOGIN</h1>
+
+                <div>
+                    <label for="email">Login</label>
+                    <input type="text" id="email">
+
+                    <label for="password">Senha</label>
+                    <input type="password" id="password">
+
+                    <button id="buttonLogin">Login</button>
+                </div>
+
+                <a href="./register.html">Não possui uma conta?</a>
             </div>
-            <button id="buttonAdd">Enviar tarefa</button>
         </div>
-        <div class="taskarea" id="taskarea">
-            <!-- <div class="taskbox">
-                <span></span>
-            </div> -->
-        </div>
-    </main>
-    <script type="module" src="./js/index.js"></script>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./js/login.js"></script>
 </body>
 </html>

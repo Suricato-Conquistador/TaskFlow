@@ -12,11 +12,11 @@ const userId = sessionStorage.getItem("id")
 // Verify if exists a logged user
 const verifyUser = async() => {
     if(userId === null) {
-        window.location.href = "/frontend/login.html"
+        window.location.href = "/frontend/index.html"
     }
     const response = await getUserById(userId)
     if(response["status_code"] != 200) {
-        window.location.href = "/frontend/login.html"
+        window.location.href = "/frontend/index.html"
     }
 }
 
